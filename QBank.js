@@ -8,7 +8,7 @@ import bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 
 
-export function Background() {
+export function QBankPage() {
     return (
         <div className="container" style={{backgroundColor: '#090f1a'}}>
             <div className="page">
