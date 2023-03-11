@@ -7,6 +7,18 @@
   pointer-events: none;
 }
 
+.dynamic-table {
+  width: 20%;
+  max-width: 20px;
+  margin: 0 auto;
+}
+
+.dynamic-table td {
+  width: 50px;
+  height: 30px;
+}
+
+
 .page {
   display: flex;
   position: relative;
