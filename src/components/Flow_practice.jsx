@@ -16,11 +16,12 @@ import Not_gate from "./Not_gate";
 import Input_box from "./Input_box";
 import Panel_button from "./Panel_button";
 import Bigger_panel_button from "./Bigger_panel_button";
+import { toast } from "react-toastify";
 const nodeTypes = {
-  and_gate: And_gate,
-  or_gate: Or_gate,
-  nand_gate: Nand_gate,
-  not_gate: Not_gate,
+  and: And_gate,
+  or: Or_gate,
+  nand: Nand_gate,
+  not: Not_gate,
   in: Input_box,
 };
 
@@ -51,11 +52,18 @@ const initialNodes = [
   },
 ];
 
-const initialEdges = [];
+const initialEdges = [
+  { id: "1", source: "A", target: "and_1", targetHandle: "a" },
+];
 
-function Flow({ setData, full }) {
+function Flow_practice({ expression }) {
+  expression = expression.split(" ");
+  let nodes_temp = [];
+  let edges_temp = [];
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
+  for (let i = 0; i < expression.length; i++) {}
+
   function create_links() {
     let associations = {};
     for (let i = 0; i < edges.length; i++) {
@@ -80,7 +88,7 @@ function Flow({ setData, full }) {
       return null;
     }
   }
-  async function calculate() {
+  async function upload() {
     let associations = create_links();
     let expression = "";
     for (let key in associations) {
@@ -96,7 +104,7 @@ function Flow({ setData, full }) {
       expression += " ";
     }
     console.log(expression);
-    let response = await fetch("http://127.0.0.1:5000/calculate", {
+    let response = await fetch("http://127.0.0.1:5000/save", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -104,8 +112,30 @@ function Flow({ setData, full }) {
       body: JSON.stringify({ expression: expression, inputs: 3 }),
     });
     let data = await response.json();
-    console.log(data);
-    setData(data);
+    if (data.status === "failed") {
+      toast.error(data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      return;
+    } else {
+      toast.success(data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
   }
   const onNodesChange = useCallback(
     (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -124,12 +154,7 @@ function Flow({ setData, full }) {
     []
   );
   return (
-    <div
-      className={
-        full
-          ? " h-full w-full col-span-5 px-4 py-5 box-border"
-          : " h-full w-full  col-span-4 px-4 py-5 box-border"
-      }>
+    <div className=" h-full w-full col-span-4 px-4 py-5 box-border">
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -198,22 +223,11 @@ function Flow({ setData, full }) {
             value="NOT"
           />
         </Panel>
-        <Panel position={Position.Right}>
-          <Bigger_panel_button value="Calculate" updater={calculate} />
-        </Panel>
-        <Panel position="bottom-right">
-          <Bigger_panel_button
-            value="Clear"
-            updater={() => {
-              setNodes(initialNodes);
-              setEdges(initialEdges);
-            }}
-          />
-        </Panel>
+
         <Controls />
       </ReactFlow>
     </div>
   );
 }
 
-export default memo(Flow);
+export default memo(Flow_practice);

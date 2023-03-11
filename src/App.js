@@ -1,18 +1,38 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import Flow from "./components/Flow";
-import Truth_table from "./components/Truth_table";
-import { useState } from "react";
-import { useCallback } from "react";
+import Landing from "./pages/Landing";
+import Check_gate from "./pages/Check_gates";
+import Upload from "./pages/Upload";
+import Practice from "./pages/Practice";
 
 function App() {
-  const [data, setData] = useState([]);
   return (
     <div className="App">
-      <div className=" text-white flex justify-center items-center h-14 w-full rounded font-bold bg-blue-500"> Logic circuit simulator</div>
-      <div className=" grid grid-cols-6  h-full w-full items-center justify-items-center">
-        <Flow setData={setData} />
-        <Truth_table outputs={data.output} inputs={data.truth_table} />
+      <div className=" text-white flex justify-center items-center h-14 w-full rounded font-bold bg-blue-500 hover:text-black">
+        <a href="/">Logic circuit simulator</a>
       </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/check" element={<Check_gate />} />
+          <Route path="/" element={<Landing />} />
+          <Route path="/upload" element={<Upload />} />
+          <Route path="/practice" element={<Practice data={{}}/>} />
+        </Routes>
+      </BrowserRouter>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 }
