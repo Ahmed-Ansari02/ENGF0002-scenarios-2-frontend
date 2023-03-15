@@ -10,7 +10,6 @@ function Questions_page() {
     async function fetchData() {
       const res = await fetch("http://127.0.0.1:5000/get");
       const data = await res.json();
-      console.log(data);
       setData(data);
     }
     fetchData();

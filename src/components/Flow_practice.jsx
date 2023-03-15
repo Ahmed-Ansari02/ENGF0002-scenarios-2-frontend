@@ -52,17 +52,57 @@ const initialNodes = [
   },
 ];
 
-const initialEdges = [
-  { id: "1", source: "A", target: "and_1", targetHandle: "a" },
-];
-
 function Flow_practice({ expression }) {
-  expression = expression.split(" ");
-  let nodes_temp = [];
-  let edges_temp = [];
-  const [nodes, setNodes] = useState(initialNodes);
-  const [edges, setEdges] = useState(initialEdges);
-  for (let i = 0; i < expression.length; i++) {}
+  expression = expression.split(" ").slice(0, -1);
+  let nodes_list = [];
+  let edges_list = [];
+  let stack = [];
+  for (let i = 0; i < expression.length; i++) {
+    if (parse_gate(expression[i]) === null) {
+      stack.push(expression[i]);
+    } else {
+      let gate = parse_gate(expression[i]);
+      let target = gate + "_" + i.toString();
+      nodes_list.push({
+        id: target,
+        position: {
+          x: 300 + 200 * (nodes_list.length % 3),
+          y: 300 + 200 * (nodes_list.length % 2),
+        },
+        data: { label: gate },
+        type: gate,
+      });
+      if (gate === "not") {
+        let src1 = stack.pop();
+        edges_list.push({
+          id: i,
+          source: src1,
+          target: target,
+        });
+        stack.push(target);
+      } else {
+        let src1 = stack.pop();
+        let src2 = stack.pop();
+
+        edges_list.push({
+          id: gate + "_" + i.toString() + src1,
+          source: src2,
+          target: target,
+          targetHandle: "a",
+        });
+        edges_list.push({
+          id: gate + "_" + i.toString() + src2,
+          source: src1,
+          target: target,
+          targetHandle: "b",
+        });
+        stack.push(target);
+      }
+    }
+  }
+
+  const [nodes, setNodes] = useState([...initialNodes, ...nodes_list]);
+  const [edges, setEdges] = useState([...edges_list]);
 
   function create_links() {
     let associations = {};
@@ -77,13 +117,13 @@ function Flow_practice({ expression }) {
   }
   function parse_gate(str) {
     if (str.includes("NAND")) {
-      return "NAND";
+      return "nand";
     } else if (str.includes("OR")) {
-      return "OR";
+      return "or";
     } else if (str.includes("AND")) {
-      return "AND";
+      return "and";
     } else if (str.includes("NOT")) {
-      return "NOT";
+      return "not";
     } else {
       return null;
     }

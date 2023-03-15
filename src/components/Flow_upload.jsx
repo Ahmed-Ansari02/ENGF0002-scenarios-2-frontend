@@ -57,6 +57,7 @@ const initialEdges = [];
 function Flow_upload() {
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
+  const [diff, setDiff] = useState(1);
   function create_links() {
     let associations = {};
     for (let i = 0; i < edges.length; i++) {
@@ -96,13 +97,17 @@ function Flow_upload() {
       expression += parse_gate(key);
       expression += " ";
     }
-    console.log(expression);
+
     let response = await fetch("http://127.0.0.1:5000/save", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ expression: expression, inputs: 3 }),
+      body: JSON.stringify({
+        difficulty: diff,
+        expression: expression,
+        inputs: 3,
+      }),
     });
     let data = await response.json();
     if (data.status === "failed") {
@@ -217,7 +222,12 @@ function Flow_upload() {
           />
         </Panel>
         <Panel position={Position.Right}>
-          <Bigger_panel_button value="Upload" updater={upload} />
+          <div className="bg-white rounded">
+            <Panel_button value="Easy" updater={() => setDiff(1)} />
+            <Panel_button value="Medium" updater={() => setDiff(2)} />
+            <Panel_button value="Hard" updater={() => setDiff(3)} />
+            <Bigger_panel_button value="Upload" updater={upload} />
+          </div>
         </Panel>
         <Panel position="bottom-right">
           <Bigger_panel_button

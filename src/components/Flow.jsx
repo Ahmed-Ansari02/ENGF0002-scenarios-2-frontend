@@ -95,7 +95,6 @@ function Flow({ setData, full }) {
       expression += parse_gate(key);
       expression += " ";
     }
-    console.log(expression);
     let response = await fetch("http://127.0.0.1:5000/calculate", {
       method: "POST",
       headers: {
@@ -104,7 +103,6 @@ function Flow({ setData, full }) {
       body: JSON.stringify({ expression: expression, inputs: 3 }),
     });
     let data = await response.json();
-    console.log(data);
     setData(data);
   }
   const onNodesChange = useCallback(

@@ -15,15 +15,17 @@ function Truth_table({ outputs, inputs }) {
         </tr>
         {inputs.map((input, i) => {
           return (
-            <tr className=" border">
-              {input.map((cell) => {
+            <tr className=" border" key={i}>
+              {input.map((cell, index) => {
                 return (
-                  <td className="border border-separate font-bold border-blue-600 w-9">
+                  <td
+                    key={index}
+                    className="border border-separate font-bold border-blue-600 w-9">
                     {cell}
                   </td>
                 );
               })}
-              <td className="border border-separate  border-blue-600 font-bold">
+              <td className="border border-separate  border-blue-600 font-bold" key={i}>
                 <input
                   contentEditable="true"
                   className="font-bold p-0 h-full w-full flex justify-center items-center"

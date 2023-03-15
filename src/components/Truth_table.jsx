@@ -15,16 +15,16 @@ function Truth_table({ outputs, inputs }) {
         </tr>
         {inputs.map((input, i) => {
           return (
-            <tr className=" border">
-              {input.map((cell) => {
+            <tr className=" border" key={i}>
+              {input.map((cell,index) => {
                 return (
-                  <td className="border border-separate font-bold border-blue-600">
+                  <td className="border border-separate font-bold border-blue-600" key={index}>
                     {cell}
                   </td>
                 );
               })}
 
-              <td className="border border-separate  border-blue-600 font-bold">
+              <td className="border border-separate  border-blue-600 font-bold" key={i}>
                 {String(outputs[i][0])}
               </td>
             </tr>
