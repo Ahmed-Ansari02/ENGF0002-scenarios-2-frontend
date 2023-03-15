@@ -6,6 +6,7 @@ import Landing from "./pages/Landing";
 import Check_gate from "./pages/Check_gates";
 import Upload from "./pages/Upload";
 import Practice from "./pages/Practice";
+import Questions_page from "./pages/Questions_page";
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
           <Route path="/check" element={<Check_gate />} />
           <Route path="/" element={<Landing />} />
           <Route path="/upload" element={<Upload />} />
-          <Route path="/practice" element={<Practice data={{}}/>} />
+          <Route path="/question" element={<Questions_page />} />
+          <Route path="/practice" element={<Practice />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer

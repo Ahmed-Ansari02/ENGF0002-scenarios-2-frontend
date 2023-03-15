@@ -88,55 +88,7 @@ function Flow_practice({ expression }) {
       return null;
     }
   }
-  async function upload() {
-    let associations = create_links();
-    let expression = "";
-    for (let key in associations) {
-      let inputs = associations[key];
-      for (let input of inputs) {
-        if (parse_gate(input) !== null) {
-          continue;
-        }
-        expression += input;
-        expression += " ";
-      }
-      expression += parse_gate(key);
-      expression += " ";
-    }
-    console.log(expression);
-    let response = await fetch("http://127.0.0.1:5000/save", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ expression: expression, inputs: 3 }),
-    });
-    let data = await response.json();
-    if (data.status === "failed") {
-      toast.error(data.message, {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-      return;
-    } else {
-      toast.success(data.message, {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    }
-  }
+
   const onNodesChange = useCallback(
     (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
     []

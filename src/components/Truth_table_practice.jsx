@@ -1,7 +1,7 @@
 import React from "react";
 
 function Truth_table({ outputs, inputs }) {
-  if (outputs === undefined || inputs === undefined) {
+  if (outputs === null || inputs === null) {
     return <div></div>;
   }
   return (
@@ -18,30 +18,29 @@ function Truth_table({ outputs, inputs }) {
             <tr className=" border">
               {input.map((cell) => {
                 return (
-                  <td className="border border-separate font-bold border-blue-600">
+                  <td className="border border-separate font-bold border-blue-600 w-9">
                     {cell}
                   </td>
                 );
               })}
-
               <td className="border border-separate  border-blue-600 font-bold">
-                <textarea
-                  className="w-full h-full font-bold"
+                <input
+                  contentEditable="true"
+                  className="font-bold p-0 h-full w-full flex justify-center items-center"
                   onChange={(e) => {
-                    console.log(e.target.value);
-                    if (e.target.value.equalIgnoreCase(String(outputs[i][0]))) {
+                    if (
+                      e.target.value.toLocaleLowerCase() ===
+                      String(outputs[i][0])
+                    ) {
                       e.target.style.backgroundColor = "green";
                     } else {
                       e.target.style.backgroundColor = "red";
                     }
-                  }}>
-                  True or False
-                </textarea>
+                  }}></input>
               </td>
             </tr>
           );
         })}
-        {}
       </table>
     </div>
   );

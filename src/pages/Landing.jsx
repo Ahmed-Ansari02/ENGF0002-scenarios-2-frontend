@@ -15,7 +15,7 @@ function Landing() {
           <a href="/upload">Upload questions 💿</a>
         </button>
         <button className="rounded text-white bg-blue-500 hover:bg-blue-400 px-2 py-2 m-4">
-          <a href="/practice">Practice questions ❓</a>
+          <a href="/question">Practice questions ❓</a>
         </button>
       </div>
     </div>
