@@ -11,7 +11,7 @@ import Questions_page from "./pages/Questions_page";
 function App() {
   return (
     <div className="App">
-      <div className=" text-white flex justify-center items-center h-14 w-full rounded font-bold bg-blue-500 hover:text-black">
+      <div className=" text-white flex justify-center items-center text-2xl h-14 w-full rounded font-bold bg-blue-500 hover:text-black">
         <a href="/">Logic circuit simulator</a>
       </div>
       <BrowserRouter>

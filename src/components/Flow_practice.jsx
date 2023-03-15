@@ -156,66 +156,6 @@ function Flow_practice({ expression }) {
         onConnect={onConnect}
         nodeTypes={nodeTypes}>
         <Background />
-        <Panel className="bg-white rounded flex-col w-fit justify-center ">
-          <Panel_button
-            updater={() =>
-              setNodes((nodes) => [
-                ...nodes,
-                {
-                  id: "AND" + String(nodes.length - 2),
-                  position: { x: 400, y: 400 },
-                  data: { label: "AND" },
-                  type: "and_gate",
-                },
-              ])
-            }
-            value="AND"
-          />
-          <Panel_button
-            updater={() =>
-              setNodes((nodes) => [
-                ...nodes,
-                {
-                  id: "OR" + String(nodes.length - 2),
-                  position: { x: 400, y: 400 },
-                  data: { label: "OR" },
-                  type: "or_gate",
-                },
-              ])
-            }
-            value="OR"
-          />
-
-          <Panel_button
-            updater={() =>
-              setNodes((nodes) => [
-                ...nodes,
-                {
-                  id: "NAND" + String(nodes.length - 2),
-                  position: { x: 400, y: 400 },
-                  data: { label: "NAND" },
-                  type: "nand_gate",
-                },
-              ])
-            }
-            value="NAND"
-          />
-          <Panel_button
-            updater={() =>
-              setNodes((nodes) => [
-                ...nodes,
-                {
-                  id: "NOT" + String(nodes.length - 2),
-                  position: { x: 400, y: 400 },
-                  data: { label: "NOT" },
-                  type: "not_gate",
-                },
-              ])
-            }
-            value="NOT"
-          />
-        </Panel>
-
         <Controls />
       </ReactFlow>
     </div>

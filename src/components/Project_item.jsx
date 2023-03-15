@@ -9,7 +9,7 @@ function Project_item({ Question, Difficulty, redirect }) {
     <div
       className={`grid grid-cols-4 w-7/12 h-16 rounded ${
         Difficulty === "Easy" ? easy : Difficulty === "Medium" ? medium : hard
-      } justify-items-center items-center p-2 text-xl font-bold m-2`}>
+      } justify-items-center items-center p-2 text-xl font-bold m-1`}>
       <p className="w-fit"> Q{Question} </p>
       <p className=" col-span-2"> {Difficulty} </p>
       {redirect}

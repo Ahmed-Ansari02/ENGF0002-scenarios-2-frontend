@@ -51,12 +51,12 @@ function Questions_page() {
   }
 
   return (
-    <div className="h-full w-full">
-      <h1 className=" text-white font-bold text-3xl mt-4">
+    <div className="h-full w-full mt-5">
+      <h1 className=" text-white font-bold text-3xl box-border">
         {" "}
         Choose a question to practice{" "}
       </h1>
-      <div className="flex flex-col justify-center items-center mt-7">
+      <div className="flex flex-col justify-center items-center h-5/6 mt-7">
         {return_question(data)}
       </div>
     </div>
