@@ -4,6 +4,13 @@ This is the repository for the React frontend code for the logic simulator app b
 # Video demonstration
 [Demonstartion of logic circuit visualizer](https://youtu.be/cJyrw1PyjKA)
 
+# Technologies and libraries used
+1. React.js
+2. Tailwind CSS
+3. React flow
+4. React Router
+
+
 ## How to run the code?
 1. Make sure you have Node js installed.
 2. Clone this repository.
