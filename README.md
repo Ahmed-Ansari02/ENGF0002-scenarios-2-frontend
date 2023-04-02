@@ -1,6 +1,9 @@
 # ENGF0002 frontend code
 This is the repository for the React frontend code for the logic simulator app built as part of the ENGF0002 module 🚀
 
+# Video demonstration
+[Demonstartion of logic circuit visualizer](https://youtu.be/cJyrw1PyjKA)
+
 ## How to run the code?
 1. Make sure you have Node js installed.
 2. Clone this repository.
